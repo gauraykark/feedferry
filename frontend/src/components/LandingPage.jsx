@@ -26,6 +26,7 @@ export default function LandingPage({ onGetStarted }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 reveal">Welcome to Feed Ferry</h1>
           <p className="text-xl md:text-2xl mb-10 opacity-90 reveal delay-1">Connect surplus food to those in need</p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 reveal delay-2">
             <button onClick={onGetStarted} className="bg-white text-green-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-50 transition-all shadow-lg hover:scale-105">
               Get Started
@@ -34,6 +35,7 @@ export default function LandingPage({ onGetStarted }) {
               Learn More
             </a>
           </div>
+
           <div className="grid grid-cols-3 gap-8 max-w-md mx-auto reveal delay-3">
             {[
               { val: stats.meals, label: 'Meals Donated' },
@@ -46,6 +48,43 @@ export default function LandingPage({ onGetStarted }) {
               </div>
             ))}
           </div>
+
+          {/* Hero Impact Badge - ADDED */}
+          <div className="mt-12 flex justify-center reveal delay-3">
+            <div className="group relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-2xl hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center gap-4">
+                
+                {/* Animated Icon */}
+                <div className="relative flex-shrink-0">
+                  <div className="absolute inset-0 bg-green-300 rounded-full blur-md opacity-40 animate-pulse"></div>
+                  <div className="relative w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <Leaf size={25} className="text-green-600" />
+                  </div>
+                </div>
+
+                {/* Text */}
+                <div className="text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                    <span className="text-xs uppercase tracking-wider font-semibold text-green-100">
+                      Making an Impact
+                    </span>
+                  </div>
+
+                  <p className="text-lg font-bold text-white">
+                    Every meal deserves a second chance.
+                  </p>
+
+                  <p className="text-sm text-white/70">
+                    Together, we can turn surplus into support.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {/* END Hero Impact Badge */}
+
         </div>
       </section>
 
