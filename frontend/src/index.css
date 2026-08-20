@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import 'leaflet/dist/leaflet.css';
+@import "tailwindcss";
+
+:root {
+  --primary: #2ecc71;
+  --secondary: #27ae60;
+  --accent: #e74c3c;
+  --dark: #2c3e50;
+  --light: #ecf0f1;
+  --text: #34495e;
+  --white: #ffffff;
+  --shadow-sm: 0 6px 18px rgba(0,0,0,0.08);
+  --shadow-md: 0 14px 40px rgba(0,0,0,0.14);
+  --ease-out: cubic-bezier(.2,.8,.2,1);
+}
+
+* { font-family: 'Poppins', sans-serif; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.22s; }
+.delay-3 { transition-delay: 0.32s; }
+
+/* Premium hover lift for cards, matching reference design */
+.problem-card,
+.feature-card,
+.impact-card,
+.step-card,
+.list-item,
+.tracking-card,
+.stat-box {
+  box-shadow: var(--shadow-sm);
+  transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes cta-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  50% { box-shadow: 0 0 0 12px rgba(255,255,255,0.25); }
+}
+.hero-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 220% 220%;
+  animation: gradient-shift 14s var(--ease-out) infinite;
+}
+.cta-pulse {
+  animation: cta-pulse-anim 2.8s var(--ease-out) infinite;
+}
+
+.problem-card:hover,
+.feature-card:hover,
+.impact-card:hover,
+.step-card:hover,
+.list-item:hover,
+.tracking-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.leaflet-container { z-index: 1; }
