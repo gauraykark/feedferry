@@ -1,64 +1,113 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Leaf, Trash2, HeartCrack, Link2Off, MapPin, ShieldCheck, Eye, BarChart, Smartphone, Users, CheckCircle } from 'lucide-react'
+import {
+  Leaf,
+  Trash2,
+  HeartCrack,
+  Link2Off,
+  MapPin,
+  ShieldCheck,
+  Eye,
+  BarChart,
+  Smartphone,
+  Users,
+  CheckCircle,
+  ArrowRight,
+  Utensils,
+  HandHeart,
+  Truck,
+  Sparkles,
+} from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function LandingPage({ onGetStarted }) {
-  const [stats, setStats] = useState({ meals: 0, ngos: 0, cities: 0 })
+  const [stats, setStats] = useState({
+    meals: 0,
+    ngos: 0,
+    cities: 0
+  })
 
   useEffect(() => {
     async function loadStats() {
       const [{ count: meals }, { data: profiles }] = await Promise.all([
-        supabase.from('donations').select('*', { count: 'exact', head: true }),
-        supabase.from('profiles').select('role, city'),
+        supabase
+          .from('donations')
+          .select('*', { count: 'exact', head: true }),
+
+        supabase
+          .from('profiles')
+          .select('role, city'),
       ])
-      const ngos = (profiles || []).filter(p => p.role === 'ngo').length
-      const cities = new Set((profiles || []).map(p => p.city).filter(Boolean)).size
-      setStats({ meals: meals || 0, ngos, cities })
+
+      const ngos = (profiles || []).filter(
+        p => p.role === 'ngo'
+      ).length
+
+      const cities = new Set(
+        (profiles || [])
+          .map(p => p.city)
+          .filter(Boolean)
+      ).size
+
+      setStats({
+        meals: meals || 0,
+        ngos,
+        cities
+      })
     }
+
     loadStats()
   }, [])
 
   return (
     <div className="pt-16">
 
-      {/* Hero */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
+
       <section
         id="home"
         className="min-h-screen flex items-center text-white hero-gradient relative overflow-hidden"
       >
 
-        {/* Background Decorative Elements */}
+        {/* Background Decorations */}
+
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-          <div className="absolute -top-32 -right-32 w-96 h-96 bg-green-400/20 rounded-full blur-3xl"></div>
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-green-400/20 rounded-full blur-3xl" />
 
-          <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl" />
 
-          <div className="absolute bottom-0 right-1/3 w-72 h-72 bg-emerald-300/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/3 w-72 h-72 bg-emerald-300/10 rounded-full blur-3xl" />
 
-          {/* Floating dots */}
-          <div className="absolute top-32 left-[12%] w-3 h-3 bg-white/30 rounded-full animate-pulse"></div>
+          <div className="absolute top-32 left-[12%] w-3 h-3 bg-white/30 rounded-full animate-pulse" />
 
-          <div className="absolute top-[25%] right-[15%] w-2 h-2 bg-green-300/50 rounded-full animate-pulse"></div>
+          <div className="absolute top-[25%] right-[15%] w-2 h-2 bg-green-300/50 rounded-full animate-pulse" />
 
-          <div className="absolute bottom-[20%] left-[20%] w-2 h-2 bg-white/30 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-[20%] left-[20%] w-2 h-2 bg-white/30 rounded-full animate-pulse" />
 
-          <div className="absolute bottom-[30%] right-[10%] w-3 h-3 bg-green-300/30 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-[30%] right-[10%] w-3 h-3 bg-green-300/30 rounded-full animate-pulse" />
 
         </div>
+
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full relative z-10">
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* LEFT SIDE */}
+
+            {/* =================================================
+                LEFT SIDE
+            ================================================= */}
+
             <div className="text-center lg:text-left">
 
-              {/* Small Badge */}
+              {/* Header Badge */}
+
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6 reveal">
 
-                <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />
 
                 <span className="text-sm font-medium text-white/90">
                   Fighting food waste. Feeding communities.
@@ -66,7 +115,9 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
-              {/* Heading */}
+
+              {/* Main Heading */}
+
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 reveal">
 
                 Welcome to
@@ -77,12 +128,24 @@ export default function LandingPage({ onGetStarted }) {
 
               </h1>
 
+
               {/* Subtitle */}
-              <p className="text-xl md:text-2xl mb-10 opacity-90 max-w-xl mx-auto lg:mx-0 reveal delay-1">
-                Connect surplus food to those in need
+
+              <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-xl mx-auto lg:mx-0 reveal delay-1">
+                Turning surplus food into meaningful support for communities.
               </p>
 
+
+              {/* Small Description */}
+
+              <p className="text-base text-white/70 max-w-lg mx-auto lg:mx-0 mb-10 reveal delay-1">
+                Feed Ferry connects food donors with verified NGOs so that
+                good food reaches people instead of going to waste.
+              </p>
+
+
               {/* Buttons */}
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 reveal delay-2">
 
                 <button
@@ -101,13 +164,24 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
+
               {/* Stats */}
+
               <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-lg mx-auto lg:mx-0 reveal delay-3">
 
                 {[
-                  { val: stats.meals, label: 'Meals Donated' },
-                  { val: stats.ngos, label: 'Active NGOs' },
-                  { val: stats.cities, label: 'Cities Covered' },
+                  {
+                    val: stats.meals,
+                    label: 'Meals Donated'
+                  },
+                  {
+                    val: stats.ngos,
+                    label: 'Active NGOs'
+                  },
+                  {
+                    val: stats.cities,
+                    label: 'Cities Covered'
+                  },
                 ].map(s => (
 
                   <div
@@ -129,17 +203,18 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
-              {/* Hero Impact Badge */}
+
+              {/* Impact Badge */}
+
               <div className="mt-8 flex justify-center lg:justify-start reveal delay-3">
 
-                <div className="group relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 shadow-2xl hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 shadow-2xl">
 
                   <div className="flex items-center gap-4">
 
-                    {/* Animated Icon */}
                     <div className="relative flex-shrink-0">
 
-                      <div className="absolute inset-0 bg-green-300 rounded-full blur-md opacity-40 animate-pulse"></div>
+                      <div className="absolute inset-0 bg-green-300 rounded-full blur-md opacity-40 animate-pulse" />
 
                       <div className="relative w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
 
@@ -152,12 +227,11 @@ export default function LandingPage({ onGetStarted }) {
 
                     </div>
 
-                    {/* Text */}
                     <div className="text-left">
 
                       <div className="flex items-center gap-2">
 
-                        <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                        <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />
 
                         <span className="text-xs uppercase tracking-wider font-semibold text-green-100">
                           Making an Impact
@@ -183,31 +257,165 @@ export default function LandingPage({ onGetStarted }) {
 
             </div>
 
-            {/* RIGHT SIDE - VISUAL HERO */}
-            <div className="relative hidden md:block h-[520px]">
 
-              {/* Large background circles */}
-              <div className="absolute inset-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"></div>
+            {/* =================================================
+                RIGHT SIDE HERO VISUAL
+            ================================================= */}
 
-              <div className="absolute inset-20 rounded-full bg-gradient-to-br from-green-300/10 to-purple-300/10 border border-white/10"></div>
+            <div className="relative hidden md:block h-[560px]">
 
-              {/* Decorative circles */}
-              <div className="absolute top-5 right-20 w-16 h-16 border border-green-300/30 rounded-full"></div>
 
-              <div className="absolute bottom-8 left-20 w-10 h-10 border border-white/20 rounded-full"></div>
+              {/* Main Circular Background */}
 
-              {/* Central Food Card */}
+              <div className="absolute inset-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm" />
+
+              <div className="absolute inset-20 rounded-full bg-gradient-to-br from-green-300/10 to-purple-300/10 border border-white/10" />
+
+
+              {/* Decorative Circles */}
+
+              <div className="absolute top-5 right-20 w-16 h-16 border border-green-300/30 rounded-full" />
+
+              <div className="absolute bottom-8 left-20 w-10 h-10 border border-white/20 rounded-full" />
+
+
+              {/* =================================================
+                  NEW LEFT VISUAL CARD
+              ================================================= */}
+
+              <div className="absolute top-16 -left-8 bg-white/95 text-gray-800 rounded-3xl shadow-2xl p-5 w-60 hover:-translate-y-2 transition-transform duration-300 z-20">
+
+                <div className="flex items-center justify-between mb-4">
+
+                  <div>
+
+                    <p className="text-xs text-gray-400">
+                      Food Journey
+                    </p>
+
+                    <p className="font-bold text-lg">
+                      From Surplus
+                    </p>
+
+                  </div>
+
+                  <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <Utensils
+                      size={21}
+                      className="text-orange-500"
+                    />
+                  </div>
+
+                </div>
+
+
+                <div className="space-y-3">
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-9 h-9 bg-orange-50 rounded-lg flex items-center justify-center">
+                      🍛
+                    </div>
+
+                    <div className="flex-1">
+
+                      <p className="text-xs text-gray-400">
+                        Donor
+                      </p>
+
+                      <p className="text-sm font-semibold">
+                        Surplus Food
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <div className="flex justify-center">
+
+                    <ArrowRight
+                      size={18}
+                      className="text-green-500 rotate-90"
+                    />
+
+                  </div>
+
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-9 h-9 bg-green-50 rounded-lg flex items-center justify-center">
+                      <HandHeart
+                        size={19}
+                        className="text-green-600"
+                      />
+                    </div>
+
+                    <div className="flex-1">
+
+                      <p className="text-xs text-gray-400">
+                        Feed Ferry
+                      </p>
+
+                      <p className="text-sm font-semibold">
+                        Smart Matching
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <div className="flex justify-center">
+
+                    <ArrowRight
+                      size={18}
+                      className="text-green-500 rotate-90"
+                    />
+
+                  </div>
+
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-9 h-9 bg-purple-50 rounded-lg flex items-center justify-center">
+                      🤝
+                    </div>
+
+                    <div className="flex-1">
+
+                      <p className="text-xs text-gray-400">
+                        Community
+                      </p>
+
+                      <p className="text-sm font-semibold">
+                        People in Need
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* =================================================
+                  CENTRAL FOOD CARD
+              ================================================= */}
+
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 
                 <div className="relative w-52 h-52 bg-white rounded-[3rem] shadow-2xl flex items-center justify-center rotate-3 hover:rotate-0 transition-transform duration-500">
 
-                  <div className="absolute inset-3 rounded-[2.5rem] bg-gradient-to-br from-green-50 to-emerald-100"></div>
+                  <div className="absolute inset-3 rounded-[2.5rem] bg-gradient-to-br from-green-50 to-emerald-100" />
 
                   <div className="relative text-8xl">
                     🍱
                   </div>
 
-                  {/* Leaf badge */}
+
                   <div className="absolute -top-5 -right-5 w-14 h-14 bg-green-500 rounded-2xl shadow-xl flex items-center justify-center rotate-12">
 
                     <Leaf
@@ -221,8 +429,12 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
-              {/* Donation Card */}
-              <div className="absolute top-10 left-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 w-64 hover:-translate-y-2 transition-transform duration-300">
+
+              {/* =================================================
+                  DONATION CARD
+              ================================================= */}
+
+              <div className="absolute top-8 right-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 w-64 hover:-translate-y-2 transition-transform duration-300">
 
                 <div className="flex items-center gap-3">
 
@@ -254,8 +466,12 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
-              {/* NGO Card */}
-              <div className="absolute bottom-10 right-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 w-64 hover:-translate-y-2 transition-transform duration-300">
+
+              {/* =================================================
+                  NGO CARD
+              ================================================= */}
+
+              <div className="absolute bottom-8 right-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 w-64 hover:-translate-y-2 transition-transform duration-300">
 
                 <div className="flex items-center gap-3">
 
@@ -292,7 +508,11 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
-              {/* Impact Card */}
+
+              {/* =================================================
+                  IMPACT CARD
+              ================================================= */}
+
               <div className="absolute top-1/2 -right-6 -translate-y-1/2 bg-white/95 backdrop-blur text-gray-800 rounded-2xl shadow-2xl p-4 w-48 hover:scale-105 transition-transform duration-300">
 
                 <div className="flex items-center gap-2 mb-2">
@@ -322,14 +542,18 @@ export default function LandingPage({ onGetStarted }) {
 
               </div>
 
+
               {/* Connecting Route */}
-              <div className="absolute top-[40%] left-[25%] w-44 border-t-2 border-dashed border-green-300/50 rotate-[-20deg]"></div>
 
-              <div className="absolute top-[39%] left-[23%] w-3 h-3 bg-green-300 rounded-full"></div>
+              <div className="absolute top-[40%] left-[25%] w-44 border-t-2 border-dashed border-green-300/50 rotate-[-20deg]" />
 
-              <div className="absolute top-[29%] right-[28%] w-3 h-3 bg-white rounded-full"></div>
+              <div className="absolute top-[39%] left-[23%] w-3 h-3 bg-green-300 rounded-full" />
 
-              {/* Small Floating Food */}
+              <div className="absolute top-[29%] right-[28%] w-3 h-3 bg-white rounded-full" />
+
+
+              {/* Floating Food */}
+
               <div className="absolute top-1/2 left-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 text-3xl rotate-[-12deg] hover:rotate-0 transition-transform">
                 🥗
               </div>
@@ -351,53 +575,81 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* Problem */}
+      {/* =====================================================
+          PROBLEM
+      ===================================================== */}
+
       <section className="py-20 bg-gray-50">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
-            The Problem We Solve
-          </h2>
+          <div className="max-w-2xl mx-auto text-center mb-12">
 
-          <div className="grid md:grid-cols-3 gap-8">
+            <div className="inline-flex items-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+
+              <HeartCrack size={16} />
+
+              The Challenge
+
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              The Problem We Solve
+            </h2>
+
+            <p className="text-gray-500">
+              Good food is often wasted while people nearby need support.
+              Feed Ferry helps close that gap.
+            </p>
+
+          </div>
+
+
+          <div className="grid md:grid-cols-3 gap-6">
 
             {[
               {
                 Icon: Trash2,
-                title: '78M Tonnes Wasted',
-                desc: 'India wastes over 78 million tonnes of food annually',
-                color: 'text-red-500'
+                title: 'Food Waste',
+                desc: 'Large amounts of safe, usable food are thrown away every day.',
+                color: 'text-red-500',
+                bg: 'bg-red-50'
               },
               {
                 Icon: HeartCrack,
-                title: 'Hunger Crisis',
-                desc: 'Millions face food insecurity every day',
-                color: 'text-orange-500'
+                title: 'Food Insecurity',
+                desc: 'Many people and communities still struggle to access enough food.',
+                color: 'text-orange-500',
+                bg: 'bg-orange-50'
               },
               {
                 Icon: Link2Off,
-                title: 'Missing Connection',
-                desc: 'No easy way between surplus and those in need',
-                color: 'text-yellow-500'
+                title: 'Disconnected Resources',
+                desc: 'Donors and organizations often lack a simple way to connect.',
+                color: 'text-yellow-500',
+                bg: 'bg-yellow-50'
               },
-            ].map(({ Icon, title, desc, color }) => (
+            ].map(({ Icon, title, desc, color, bg }) => (
 
               <div
                 key={title}
-                className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow reveal"
+                className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 reveal"
               >
 
-                <Icon
-                  size={48}
-                  className={`${color} mx-auto mb-4`}
-                />
+                <div className={`w-12 h-12 ${bg} rounded-xl flex items-center justify-center mb-5`}>
+
+                  <Icon
+                    size={25}
+                    className={color}
+                  />
+
+                </div>
 
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
                   {title}
                 </h3>
 
-                <p className="text-gray-500">
+                <p className="text-gray-500 leading-relaxed">
                   {desc}
                 </p>
 
@@ -412,24 +664,38 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* About */}
+      {/* =====================================================
+          ABOUT
+      ===================================================== */}
+
       <section id="about" className="py-20">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="max-w-3xl mx-auto text-center">
 
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <div className="inline-flex items-center gap-2 bg-green-50 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+
+              <Leaf size={16} />
+
               About Feed Ferry
+
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              Technology with a Purpose
             </h2>
 
             <p className="text-lg text-gray-600 mb-4">
-              Feed Ferry connects restaurants, hotels, events, and individuals with verified NGOs to ensure excess food reaches those who need it most.
+              Feed Ferry connects restaurants, hotels, events, and individuals
+              with verified NGOs so surplus food can reach people who need it.
             </p>
 
             <p className="text-lg text-gray-600 mb-10">
-              Our mission is to eliminate food waste while fighting hunger through technology and community engagement.
+              Our goal is simple: reduce food waste and make community support
+              easier through technology.
             </p>
+
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
@@ -467,14 +733,34 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* How it works */}
+      {/* =====================================================
+          HOW IT WORKS
+      ===================================================== */}
+
       <section className="py-20 bg-gray-50">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
-            How It Works
-          </h2>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+
+            <div className="inline-flex items-center gap-2 bg-green-50 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+
+              <Sparkles size={16} />
+
+              Simple Process
+
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              How It Works
+            </h2>
+
+            <p className="text-gray-500">
+              Four simple steps turn surplus food into meaningful support.
+            </p>
+
+          </div>
+
 
           <div className="grid md:grid-cols-4 gap-6">
 
@@ -483,25 +769,25 @@ export default function LandingPage({ onGetStarted }) {
                 n: 1,
                 icon: '👤',
                 title: 'Sign Up',
-                desc: 'Register as Donor, NGO, or Volunteer'
+                desc: 'Create an account as a donor, NGO, or volunteer.'
               },
               {
                 n: 2,
                 icon: '🍛',
                 title: 'Post Food',
-                desc: 'Donors post available surplus food'
+                desc: 'Share details about available surplus food.'
               },
               {
                 n: 3,
-                icon: '🤖',
-                title: 'Smart Match',
-                desc: 'Matches food with nearest NGO'
+                icon: '📍',
+                title: 'Get Matched',
+                desc: 'The platform helps connect food with nearby NGOs.'
               },
               {
                 n: 4,
                 icon: '🤝',
                 title: 'Deliver',
-                desc: 'Volunteers deliver to people in need'
+                desc: 'Food is collected and delivered to those in need.'
               },
             ].map(({ n, icon, title, desc }) => (
 
@@ -522,7 +808,7 @@ export default function LandingPage({ onGetStarted }) {
                   {title}
                 </h3>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-sm leading-relaxed">
                   {desc}
                 </p>
 
@@ -537,53 +823,73 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* Features */}
+      {/* =====================================================
+          FEATURES
+      ===================================================== */}
+
       <section className="py-20">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
-            Our Features
-          </h2>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+
+              <Sparkles size={16} />
+
+              Built for Impact
+
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Our Features
+            </h2>
+
+            <p className="text-gray-500">
+              Simple tools that make food donation easier and more transparent.
+            </p>
+
+          </div>
+
 
           <div className="grid md:grid-cols-3 gap-6">
 
             {[
               {
                 Icon: MapPin,
-                title: 'Smart Location-based Pairing',
-                desc: 'Uses GPS to match food with nearest NGO'
+                title: 'Smart Matching',
+                desc: 'Connect surplus food with nearby NGOs.'
               },
               {
                 Icon: ShieldCheck,
-                title: 'All NGOs Verified',
-                desc: 'Every organization is verified for authenticity'
+                title: 'Verified NGOs',
+                desc: 'Work with trusted and verified organizations.'
               },
               {
                 Icon: Eye,
-                title: 'Track End-to-End',
-                desc: 'Follow your donation from start to finish'
+                title: 'Track Donations',
+                desc: 'See the progress of your donation.'
               },
               {
                 Icon: BarChart,
-                title: 'See Your Impact',
-                desc: 'View your contribution metrics and stats'
+                title: 'Measure Impact',
+                desc: 'Understand how your contributions help.'
               },
               {
                 Icon: Smartphone,
-                title: 'Easy-to-use App',
-                desc: 'Simple interface for all user types'
+                title: 'Easy to Use',
+                desc: 'A simple experience for every user.'
               },
               {
                 Icon: Users,
                 title: 'Volunteer Network',
-                desc: 'Join our community of volunteers'
+                desc: 'Help move food where it is needed.'
               },
             ].map(({ Icon, title, desc }) => (
 
               <div
                 key={title}
-                className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md transition-shadow reveal"
+                className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all reveal"
               >
 
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
@@ -599,7 +905,7 @@ export default function LandingPage({ onGetStarted }) {
                   {title}
                 </h3>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-sm leading-relaxed">
                   {desc}
                 </p>
 
@@ -614,38 +920,58 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* Impact */}
+      {/* =====================================================
+          IMPACT
+      ===================================================== */}
+
       <section className="py-20 bg-gray-50">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
-            Our Impact
-          </h2>
+          <div className="max-w-2xl mx-auto text-center mb-12">
 
-          <div className="grid md:grid-cols-3 gap-8">
+            <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+
+              <Leaf size={16} />
+
+              Why It Matters
+
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Our Impact
+            </h2>
+
+            <p className="text-gray-500">
+              Every successful donation creates a positive difference.
+            </p>
+
+          </div>
+
+
+          <div className="grid md:grid-cols-3 gap-6">
 
             {[
               {
                 icon: '🌿',
                 title: 'Environmental',
-                desc: 'Diverts food waste from landfills, reducing methane emissions'
+                desc: 'Less food waste means fewer resources are wasted.'
               },
               {
-                icon: '👥',
+                icon: '❤️',
                 title: 'Social',
-                desc: 'Reduces hunger while building community care networks'
+                desc: 'More food can reach people who need support.'
               },
               {
                 icon: '🤝',
                 title: 'Community',
-                desc: 'Creates meaningful connections between donors and receivers'
+                desc: 'Donors, NGOs, and volunteers work together.'
               },
             ].map(({ icon, title, desc }) => (
 
               <div
                 key={title}
-                className="impact-card bg-white rounded-2xl p-8 text-center reveal"
+                className="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-all reveal"
               >
 
                 <div className="text-5xl mb-4">
@@ -671,17 +997,30 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* CTA */}
+      {/* =====================================================
+          CTA
+      ===================================================== */}
+
       <section className="py-20 text-center hero-gradient">
 
         <div className="max-w-xl mx-auto px-4">
 
-          <h2 className="text-3xl font-bold mb-4">
-            Join thousands in fighting hunger and food waste
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-6">
+
+            <HandHeart size={17} />
+
+            <span className="text-sm">
+              Be part of the solution
+            </span>
+
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Turn Surplus Into Support
           </h2>
 
           <p className="mb-8 text-lg opacity-90">
-            Start your journey with Feed Ferry today
+            Start your journey with Feed Ferry today.
           </p>
 
           <button
@@ -696,14 +1035,26 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* Contact */}
+      {/* =====================================================
+          CONTACT
+      ===================================================== */}
+
       <section id="contact" className="py-20">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
-            Contact Us
-          </h2>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Contact Us
+            </h2>
+
+            <p className="text-gray-500">
+              Have a question or want to work with us? Get in touch.
+            </p>
+
+          </div>
+
 
           <div className="grid md:grid-cols-2 gap-12">
 
@@ -761,16 +1112,20 @@ export default function LandingPage({ onGetStarted }) {
                       </h4>
 
                       {link ? (
+
                         <a
                           href={link}
                           className="text-green-600 hover:underline"
                         >
                           {value}
                         </a>
+
                       ) : (
+
                         <p className="text-gray-500">
                           {value}
                         </p>
+
                       )}
 
                     </div>
@@ -783,6 +1138,7 @@ export default function LandingPage({ onGetStarted }) {
 
             </div>
 
+
             <ContactForm />
 
           </div>
@@ -792,7 +1148,10 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
 
-      {/* Footer */}
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
+
       <footer className="bg-gray-900 text-white py-12">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -810,10 +1169,11 @@ export default function LandingPage({ onGetStarted }) {
               </div>
 
               <p className="text-gray-400 text-sm">
-                Fighting hunger and food waste through technology
+                Fighting hunger and food waste through technology.
               </p>
 
             </div>
+
 
             <div>
 
@@ -823,7 +1183,11 @@ export default function LandingPage({ onGetStarted }) {
 
               <ul className="space-y-2 text-gray-400 text-sm">
 
-                {['#home', '#about', '#contact'].map(href => (
+                {[
+                  '#home',
+                  '#about',
+                  '#contact'
+                ].map(href => (
 
                   <li key={href}>
 
@@ -842,6 +1206,7 @@ export default function LandingPage({ onGetStarted }) {
 
             </div>
 
+
             <div>
 
               <h4 className="font-bold mb-4 text-gray-200">
@@ -850,7 +1215,11 @@ export default function LandingPage({ onGetStarted }) {
 
               <ul className="space-y-2 text-gray-400 text-sm">
 
-                {['Facebook', 'Twitter', 'Instagram'].map(s => (
+                {[
+                  'Facebook',
+                  'Twitter',
+                  'Instagram'
+                ].map(s => (
 
                   <li key={s}>
 
@@ -871,9 +1240,11 @@ export default function LandingPage({ onGetStarted }) {
 
           </div>
 
+
           <div className="border-t border-gray-800 pt-6 text-center text-gray-400 text-sm">
 
-            © 2024 Feed Ferry. All rights reserved. Turning leftovers into lifelines.
+            © 2024 Feed Ferry. All rights reserved.
+            Turning leftovers into lifelines.
 
           </div>
 
@@ -886,6 +1257,10 @@ export default function LandingPage({ onGetStarted }) {
 }
 
 
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
 function ContactForm() {
 
   const [form, setForm] = useState({
@@ -895,6 +1270,7 @@ function ContactForm() {
   })
 
   const [loading, setLoading] = useState(false)
+
 
   async function handleSubmit(e) {
 
@@ -910,7 +1286,9 @@ function ContactForm() {
 
       if (error) throw error
 
-      toast.success("Thank you! We'll get back to you soon.")
+      toast.success(
+        "Thank you! We'll get back to you soon."
+      )
 
       setForm({
         name: '',
@@ -921,7 +1299,8 @@ function ContactForm() {
     } catch (err) {
 
       toast.error(
-        err.message || 'Failed to send message. Please try again.'
+        err.message ||
+        'Failed to send message. Please try again.'
       )
 
     } finally {
@@ -931,6 +1310,7 @@ function ContactForm() {
     }
 
   }
+
 
   return (
 
@@ -953,6 +1333,7 @@ function ContactForm() {
         className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
       />
 
+
       <input
         type="email"
         placeholder="Your Email"
@@ -966,6 +1347,7 @@ function ContactForm() {
         }
         className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
       />
+
 
       <textarea
         placeholder="Your Message"
@@ -981,12 +1363,15 @@ function ContactForm() {
         className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
       />
 
+
       <button
         type="submit"
         disabled={loading}
         className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white py-3 rounded-lg font-semibold transition-colors"
       >
-        {loading ? 'Sending...' : 'Send Message'}
+        {loading
+          ? 'Sending...'
+          : 'Send Message'}
       </button>
 
     </form>
